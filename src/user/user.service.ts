@@ -33,8 +33,8 @@ export class UserService {
     return existingUser;
   }
 
-  getUsers(): Promise<IUser[]> {
-    const users = this.userModel.find().exec();
+  async getUsers(): Promise<IUser[]> {
+    const users = await this.userModel.find().exec();
     if (!users) {
       throw new NotFoundException(`No se encontraron telefonos`);
     }
@@ -42,7 +42,7 @@ export class UserService {
   }
 
   async getUserById(userId: string): Promise<IUser> {
-    const existingUser = this.userModel.findById(userId).exec();
+    const existingUser = await this.userModel.findById(userId).exec();
     if (!existingUser) {
       throw new NotFoundException(
         `No se encontro el telefono con id ${userId}`,

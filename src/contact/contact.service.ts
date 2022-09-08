@@ -33,8 +33,8 @@ export class ContactService {
     return existingContact;
   }
 
-  getContacts(): Promise<IContact[]> {
-    const contacts = this.contactModel.find().exec();
+  async getContacts(): Promise<IContact[]> {
+    const contacts = await this.contactModel.find().exec();
     if (!contacts) {
       throw new NotFoundException(`No se encontraron contactos`);
     }
@@ -42,7 +42,7 @@ export class ContactService {
   }
 
   async getContactById(contactId: string): Promise<IContact> {
-    const existingContact = this.contactModel.findById(contactId).exec();
+    const existingContact = await this.contactModel.findById(contactId).exec();
     if (!existingContact) {
       throw new NotFoundException(
         `No se encontro el contacto con id ${contactId}`,
@@ -52,7 +52,7 @@ export class ContactService {
   }
 
   async getContactsByUserId(userId: string): Promise<IContact[]> {
-    const contacts = this.contactModel
+    const contacts = await this.contactModel
       .find()
       .exec()
       .then((cts) => cts.filter((c) => c.user_id === userId));

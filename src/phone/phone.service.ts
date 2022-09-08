@@ -33,8 +33,8 @@ export class PhoneService {
     return existingPhone;
   }
 
-  getPhones(): Promise<IPhone[]> {
-    const phones = this.phoneModel.find().exec();
+  async getPhones(): Promise<IPhone[]> {
+    const phones = await this.phoneModel.find().exec();
     if (!phones) {
       throw new NotFoundException(`No se encontraron telefonos`);
     }
@@ -42,7 +42,7 @@ export class PhoneService {
   }
 
   async getPhoneById(phoneId: string): Promise<IPhone> {
-    const existingPhone = this.phoneModel.findById(phoneId).exec();
+    const existingPhone = await this.phoneModel.findById(phoneId).exec();
     if (!existingPhone) {
       throw new NotFoundException(
         `No se encontro el telefono con id ${phoneId}`,
@@ -52,7 +52,7 @@ export class PhoneService {
   }
 
   async getPhonesByContactId(phoneId: string): Promise<IPhone[]> {
-    const phones = this.phoneModel
+    const phones = await this.phoneModel
       .find()
       .then((phs) => phs.filter((p) => p.contact_id === phoneId));
     if (!phones) {
