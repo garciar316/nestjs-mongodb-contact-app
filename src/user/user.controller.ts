@@ -87,7 +87,7 @@ export class UserController {
   async deleteUser(@Res() res, @Param('id') userId: string) {
     try {
       const deletedUser = await this.userService.deleteUser(userId);
-      return res.status(HttpStatus.OK).jso({
+      return res.status(HttpStatus.OK).json({
         message: 'Usuario eliminado corectamente',
         deletedUser,
       });

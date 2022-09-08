@@ -8,7 +8,6 @@ import {
   Put,
   Delete,
   Res,
-  Query,
 } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
@@ -86,10 +85,11 @@ export class ContactController {
     }
   }
 
-  @Get()
-  async getContactsByUserId(@Res() res, @Query('userId') userId) {
+  @Get('by_user/:userId')
+  async getContactsByUserId(@Res() res, @Param('userId') userId) {
     try {
       const contacts = await this.contactService.getContactsByUserId(userId);
+      console.log(userId);
       return res.status(HttpStatus.OK).json({
         message: 'Contactos encontrados',
         contacts,
@@ -103,7 +103,7 @@ export class ContactController {
   async deleteContact(@Res() res, @Param('id') contactId: string) {
     try {
       const deleteContact = await this.contactService.deleteContact(contactId);
-      return res.status(HttpStatus.OK).jso({
+      return res.status(HttpStatus.OK).json({
         message: 'Contacto eliminado corectamente',
         deleteContact,
       });

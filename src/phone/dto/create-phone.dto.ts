@@ -1,17 +1,13 @@
-import { IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 
 //Para usar los valdators hay que modificar main.ts
 export class CreatePhoneDto {
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
-  readonly id: number;
-
-  @IsNumber()
-  @IsNotEmpty()
-  readonly contact_id: number;
+  readonly contact_id: string;
 
   @IsString()
-  @MaxLength(30)
+  @MaxLength(80)
   @IsNotEmpty()
-  readonly phone: number;
+  readonly phone: string;
 }

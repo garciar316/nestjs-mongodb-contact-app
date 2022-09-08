@@ -52,9 +52,10 @@ export class ContactService {
   }
 
   async getContactsByUserId(userId: string): Promise<IContact[]> {
-    const contacts = (await this.contactModel.find()).filter(
-      (c) => c.user_id === parseInt(userId),
-    );
+    const contacts = this.contactModel
+      .find()
+      .exec()
+      .then((cts) => cts.filter((c) => c.user_id === userId));
     if (!contacts) {
       throw new NotFoundException(
         `No se encontraron contactos para usuario con id ${userId}`,

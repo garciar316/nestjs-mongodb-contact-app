@@ -8,7 +8,6 @@ import {
   Put,
   Delete,
   Res,
-  Query,
 } from '@nestjs/common';
 import { CreatePhoneDto } from './dto/create-phone.dto';
 import { UpdatePhoneDto } from './dto/update-phone.dto';
@@ -84,8 +83,8 @@ export class PhoneController {
     }
   }
 
-  @Get()
-  async getPhonesByContactId(@Res() res, @Query('contactId') contactId) {
+  @Get('by_contact/:contactId')
+  async getPhonesByContactId(@Res() res, @Param('contactId') contactId) {
     try {
       const phones = await this.phoneService.getPhonesByContactId(contactId);
       return res.status(HttpStatus.OK).json({
@@ -101,7 +100,7 @@ export class PhoneController {
   async deletePhone(@Res() res, @Param('id') phoneId: string) {
     try {
       const deletedPhone = await this.phoneService.deletePhone(phoneId);
-      return res.status(HttpStatus.OK).jso({
+      return res.status(HttpStatus.OK).json({
         message: 'Teléfono eliminado corectamente',
         deletedPhone,
       });
