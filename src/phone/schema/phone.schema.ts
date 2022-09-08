@@ -12,4 +12,4 @@ export class Phone {
   phone: string;
 }
 
-export const phoneSchema = SchemaFactory.createForClass(Phone);
+export const PhoneSchema = SchemaFactory.createForClass(Phone);
