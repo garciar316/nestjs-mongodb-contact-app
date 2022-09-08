@@ -38,13 +38,13 @@ export class PhoneController {
   @Put(':id')
   async updatePhone(
     @Res() res,
-    @Param('id') PhoneId: string,
-    @Body() updatePhonetDto: UpdatePhoneDto,
+    @Param('id') phoneId: string,
+    @Body() updatePhoneDto: UpdatePhoneDto,
   ) {
     try {
       const existingPhone = await this.phoneService.updatePhone(
-        PhoneId,
-        updatePhonetDto,
+        phoneId,
+        updatePhoneDto,
       );
       return res.status(HttpStatus.OK).json({
         message: 'Teléfono actualizado exitosamente',
@@ -61,10 +61,10 @@ export class PhoneController {
   @Get()
   async getPhones(@Res() res) {
     try {
-      const phonetData = await this.phoneService.getPhones();
+      const phoneData = await this.phoneService.getPhones();
       return res.status(HttpStatus.OK).json({
         message: 'Teléfonos encontrados',
-        phonetData,
+        phoneData,
       });
     } catch (err) {
       return res.status(err.status).json(err.response);
@@ -74,7 +74,7 @@ export class PhoneController {
   @Get(':id')
   async getPhoneById(@Res() res, @Param('id') phoneId: string) {
     try {
-      const teléfono = await this.phoneService.getPhonetById(phoneId);
+      const teléfono = await this.phoneService.getPhoneById(phoneId);
       return res.status(HttpStatus.OK).json({
         message: 'Teléfono encontrado',
         teléfono,

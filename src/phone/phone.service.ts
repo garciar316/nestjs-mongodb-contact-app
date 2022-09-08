@@ -41,7 +41,7 @@ export class PhoneService {
     return phones;
   }
 
-  async getPhonetById(phoneId: string): Promise<IPhone> {
+  async getPhoneById(phoneId: string): Promise<IPhone> {
     const existingPhone = this.phoneModel.findById(phoneId).exec();
     if (!existingPhone) {
       throw new NotFoundException(
