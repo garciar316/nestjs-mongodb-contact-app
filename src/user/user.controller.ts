@@ -51,7 +51,7 @@ export class UserController {
       });
     } catch (err) {
       return res.status(HttpStatus.BAD_REQUEST).json({
-        message: 'Ha ocurrido un error, no se ha actualizado el teléfono',
+        message: 'Ha ocurrido un error, no se ha actualizado el usuario',
         error: err.message,
       });
     }

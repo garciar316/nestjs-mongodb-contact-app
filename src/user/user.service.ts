@@ -25,9 +25,7 @@ export class UserService {
     );
 
     if (!existingUser) {
-      throw new NotFoundException(
-        `No se encontro un telefono con id ${userId}`,
-      );
+      throw new NotFoundException(`No se encontro un usuario con id ${userId}`);
     }
 
     return existingUser;
@@ -36,7 +34,7 @@ export class UserService {
   async getUsers(): Promise<IUser[]> {
     const users = await this.userModel.find().exec();
     if (!users) {
-      throw new NotFoundException(`No se encontraron telefonos`);
+      throw new NotFoundException(`No se encontraron usuarios`);
     }
     return users;
   }
@@ -44,9 +42,7 @@ export class UserService {
   async getUserById(userId: string): Promise<IUser> {
     const existingUser = await this.userModel.findById(userId).exec();
     if (!existingUser) {
-      throw new NotFoundException(
-        `No se encontro el telefono con id ${userId}`,
-      );
+      throw new NotFoundException(`No se encontro el usuario con id ${userId}`);
     }
     return existingUser;
   }
@@ -54,9 +50,7 @@ export class UserService {
   async deleteUser(userId: string): Promise<IUser> {
     const deletedUser = this.userModel.findByIdAndDelete(userId);
     if (!deletedUser) {
-      throw new NotFoundException(
-        `No se encontro el teléfono con id ${userId}`,
-      );
+      throw new NotFoundException(`No se encontro el usuario con id ${userId}`);
     }
     return deletedUser;
   }

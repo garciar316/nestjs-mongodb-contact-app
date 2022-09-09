@@ -51,13 +51,13 @@ export class PhoneService {
     return existingPhone;
   }
 
-  async getPhonesByContactId(phoneId: string): Promise<IPhone[]> {
+  async getPhonesByContactId(contactId: string): Promise<IPhone[]> {
     const phones = await this.phoneModel
       .find()
-      .then((phs) => phs.filter((p) => p.contact_id === phoneId));
+      .then((phs) => phs.filter((p) => p.contact_id === contactId));
     if (!phones) {
       throw new NotFoundException(
-        `No se encontraron telefonos para usuario con id ${phoneId}`,
+        `No se encontraron telefonos para contacto con id ${contactId}`,
       );
     }
     return phones;
